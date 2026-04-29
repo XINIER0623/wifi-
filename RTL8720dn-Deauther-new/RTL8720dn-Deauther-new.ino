@@ -1,6 +1,14 @@
-#include "vector"
+#ifdef max
+#undef max
+#endif
+
+#ifdef min
+#undef min
+#endif
+
+#include <vector>
 #include "wifi_conf.h"
-#include "map"
+#include <map>
 #include "wifi_cust_tx.h"
 #include "wifi_util.h"
 #include "wifi_structures.h"
@@ -117,8 +125,9 @@ String print_ssid(String ssid){
   String ssid_ = ssid;
   int ssid_length = ssid_.length();
   int max_length = 20;
-  max_length - ssid_length;
-  for(int i = 0;i < max_length;i++){
+  int padding = max_length - ssid_length;
+  if (padding < 0) padding = 0;
+  for(int i = 0; i < padding; i++){
     ssid_ += " ";
   }
   return ssid_;
